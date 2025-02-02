@@ -31,7 +31,10 @@ app.listen(PORT, () => {
 });
 
 async function screenShot(url, width=10*128, height=10*128) {
-    const browser = await launch();
+    const browser = await launch( {
+            headless: true, // or false, depending on your needs
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
     const page = await browser.newPage();
 
     await page.setViewport({ width, height });
